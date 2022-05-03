@@ -8,7 +8,8 @@ package com.enspy.malaika.social.entities;
 
 
 public enum MessageType {
-   VOICE("VOICE"),
+
+   VOICE("VOICE"), TEXT("TEXT"), IMAGE("IMAGE"), VIDEO("TEXT"),
    LINK("LINK");
 
    private final String value;
