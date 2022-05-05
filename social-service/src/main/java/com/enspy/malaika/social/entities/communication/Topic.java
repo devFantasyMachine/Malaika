@@ -38,7 +38,7 @@ public class Topic {
 
     @ManyToOne
     @JoinTable(
-            name = "topic_community",
+            name = "community_topic",
             joinColumns = @JoinColumn(name = "idTopic"),
             inverseJoinColumns = @JoinColumn(name = "idCommunity"))
     private UserCommunity community;

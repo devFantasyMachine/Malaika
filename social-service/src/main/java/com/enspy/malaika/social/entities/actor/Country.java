@@ -6,6 +6,7 @@
 
 package com.enspy.malaika.social.entities.actor;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,13 +27,14 @@ public class Country {
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
    @Column(name = "COUNTRY_ID")
-   private int countryId;
+   private Integer countryId;
 
-   @Column(unique = true, name = "COUNTRY_NAME")
+   @Column(unique = true,  name = "COUNTRY_NAME")
    private String countryName;
 
-   @OneToMany
-   private Set<User> members;
+   @OneToMany(mappedBy = "userCountry", fetch = FetchType.LAZY)
+   @JsonIgnore
+   private Set<User> residents;
 
    @Enumerated(value=EnumType.STRING)
    @Column(name = "CONTINENT")

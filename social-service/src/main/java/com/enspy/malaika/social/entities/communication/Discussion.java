@@ -27,15 +27,16 @@ public class Discussion implements Comparable<Discussion> {
    @Column(name="idDiscussion", columnDefinition = "VARCHAR(255)", insertable = false, updatable = false, nullable = false)
    private String idDiscussion;
 
+   @Column(name = "CREATED_AT")
    private LocalDate createdAt;
 
    @OneToMany(cascade = CascadeType.ALL)
    @JoinTable(
-           name = "discussions",
+           name = "discussion_messages",
            joinColumns = @JoinColumn(name = "idDiscussion"),
            inverseJoinColumns = @JoinColumn(name = "idMessage"))
    @SortComparator(MessageComparator.class)
-   public SortedSet<Message> chatMessages = new TreeSet<>();
+   public SortedSet<Message> messages = new TreeSet<>();
 
    @OneToOne
    private User user;
@@ -43,16 +44,16 @@ public class Discussion implements Comparable<Discussion> {
 
    /** @pdGenerated default getter */
    public SortedSet<Message> getMessages() {
-      if (chatMessages == null)
-         chatMessages = new TreeSet<Message>();
-      return chatMessages;
+      if (messages == null)
+         messages = new TreeSet<Message>();
+      return messages;
    }
 
    /** @pdGenerated default setter
      * @param newChatMessage */
    public void setMessages(TreeSet<Message> newChatMessage) {
       removeAllChatMessage();
-      this.chatMessages = newChatMessage;
+      this.messages = newChatMessage;
    }
    
    /** @pdGenerated default add
@@ -60,10 +61,10 @@ public class Discussion implements Comparable<Discussion> {
    public void addMessage(Message newChatMessage) {
       if (newChatMessage == null)
          return;
-      if (this.chatMessages == null)
-         this.chatMessages = new TreeSet<Message>();
-      if (!this.chatMessages.contains(newChatMessage))
-         this.chatMessages.add(newChatMessage);
+      if (this.messages == null)
+         this.messages = new TreeSet<Message>();
+      if (!this.messages.contains(newChatMessage))
+         this.messages.add(newChatMessage);
    }
    
    /** @pdGenerated default remove
@@ -71,21 +72,21 @@ public class Discussion implements Comparable<Discussion> {
    public void removeMessage(Message oldChatMessage) {
       if (oldChatMessage == null)
          return;
-      if (this.chatMessages != null)
-         if (this.chatMessages.contains(oldChatMessage))
-            this.chatMessages.remove(oldChatMessage);
+      if (this.messages != null)
+         if (this.messages.contains(oldChatMessage))
+            this.messages.remove(oldChatMessage);
    }
    
    /** @pdGenerated default removeAll */
    public void removeAllChatMessage() {
-      if (chatMessages != null)
-         chatMessages.clear();
+      if (messages != null)
+         messages.clear();
    }
 
    @Override
    public int compareTo(Discussion o) {
 
-      return chatMessages.first().getCreatedDate().compareTo( o.createdAt );
+      return messages.first().getCreatedDate().compareTo( o.createdAt );
 
    }
 

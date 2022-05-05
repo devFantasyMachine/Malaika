@@ -2,6 +2,7 @@ package com.enspy.malaika.social.entities.actor;
 
 
 import com.enspy.malaika.social.entities.communication.Discussion;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
@@ -27,8 +28,8 @@ public class User implements Serializable {
     @Column(name="USER_ID", insertable = false, updatable = false, nullable = false)
     private String userId;
 
-    @Column(name="USER_PSEUDO",unique = true, updatable = false, nullable = false)
-    private String userPseudo;
+    @Column(name="USER_LOGIN",unique = true, updatable = false, nullable = false)
+    private String userLogin;
 
     @Column(name="USER_NAME",nullable = false, length = 30)
     private String userName;
@@ -42,20 +43,23 @@ public class User implements Serializable {
     private String userTel;
 
     @Lob
-    @Column(name = "USER_PICTURE" ,nullable = false, columnDefinition = "MEDIUMBLOB")
+    @Column(name = "USER_PICTURE" , columnDefinition = "MEDIUMBLOB")
     private byte[] userImage;
 
     @JsonProperty(access= JsonProperty.Access.WRITE_ONLY)
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @Column(name = "USER_COUNTRY", updatable = false)
+    @JsonIgnore
+    @ManyToOne(optional = false,  fetch = FetchType.LAZY)
     private Country userCountry;
 
     @JsonProperty(access= JsonProperty.Access.WRITE_ONLY)
-    @Column(name = "USER_CREATED_AT",nullable = false)
+    @Column(name = "",nullable = false)
     private LocalDateTime userCreatedAt;
 
     @Column(name = "USER_LAST_VIEW",nullable = false)
     private LocalDateTime userLastView;
+
+    @Enumerated(value=EnumType.STRING)
+    private UserType userType;
 
     @Column(name = "USER_EMAIL")
     private String userEmail;
@@ -71,7 +75,7 @@ public class User implements Serializable {
                 String userPassword, String userTel,
                 byte[] userImage, Country userCountry,
                 String userEmail, String userBio) {
-        this.userPseudo = userPseudo;
+        this.userLogin = userPseudo;
         this.userName = userName;
         this.userPassword = userPassword;
         this.userTel = userTel;
@@ -117,11 +121,11 @@ public class User implements Serializable {
         if (this == o) return true;
         if (!(o instanceof User)) return false;
         User user = (User) o;
-        return Objects.equals(userId, user.userId) && Objects.equals(userPseudo, user.userPseudo);
+        return Objects.equals(userId, user.userId) && Objects.equals(userLogin, user.userLogin);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userId, userPseudo);
+        return Objects.hash(userId, userLogin);
     }
 }

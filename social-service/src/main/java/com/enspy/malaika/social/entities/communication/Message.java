@@ -9,6 +9,7 @@ package com.enspy.malaika.social.entities.communication;
 
 import com.enspy.malaika.social.entities.Content;
 import com.enspy.malaika.social.entities.actor.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -44,6 +45,7 @@ public class Message implements Comparable<Message> {
    public List<User> viewer;
 
    @JsonProperty(access= JsonProperty.Access.WRITE_ONLY)
+   @JsonIgnore
    @ManyToOne(fetch = FetchType.LAZY)
    public Message father;
 

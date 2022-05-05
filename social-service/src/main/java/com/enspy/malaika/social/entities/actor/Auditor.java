@@ -10,7 +10,6 @@ package com.enspy.malaika.social.entities.actor;
 
 import com.enspy.malaika.social.entities.communication.AuditorCommunity;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.hibernate.annotations.SortNatural;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -34,7 +33,7 @@ public class Auditor extends User implements Serializable {
 
    @ManyToMany(cascade = {CascadeType.ALL }, fetch = FetchType.LAZY)
    @JoinTable(
-           name = "auditor_communities",
+           name = "auditors_communities",
            joinColumns = @JoinColumn(name = "auditor_id"),
            inverseJoinColumns = @JoinColumn(name = "community_id"))
    public Set<AuditorCommunity> communities;

@@ -10,7 +10,9 @@ import java.util.Set;
 
 
 
-@MappedSuperclass
+//@MappedSuperclass
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public class UserCommunity {
 
 

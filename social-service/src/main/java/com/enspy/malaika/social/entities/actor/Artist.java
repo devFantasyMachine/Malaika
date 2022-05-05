@@ -43,7 +43,7 @@ public class Artist extends User implements Serializable {
 
    @ManyToMany(cascade = {CascadeType.ALL }, fetch = FetchType.LAZY)
    @JoinTable(
-           name = "artist_communities",
+           name = "artists_communities",
            joinColumns = @JoinColumn(name = "ARTIST_ID"),
            inverseJoinColumns = @JoinColumn(name = "COMMUNITY_ID"))
    public Set<ArtistCommunity> communities;
