@@ -8,15 +8,17 @@ package com.enspy.malaika.social.entities.communication;
 
 
 import com.enspy.malaika.social.entities.actor.User;
+import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.SortComparator;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-
+@Data
 @Entity
 public class Discussion implements Comparable<Discussion> {
 
@@ -30,6 +32,12 @@ public class Discussion implements Comparable<Discussion> {
    @Column(name = "CREATED_AT")
    private LocalDate createdAt;
 
+   private long participantCount;
+
+   @Enumerated(value=EnumType.STRING)
+   @Column(name = "DISCUSSION_TYPE",updatable = false, nullable = false)
+   private DiscussionType type;
+
    @OneToMany(cascade = CascadeType.ALL)
    @JoinTable(
            name = "discussion_messages",
@@ -38,8 +46,8 @@ public class Discussion implements Comparable<Discussion> {
    @SortComparator(MessageComparator.class)
    public SortedSet<Message> messages = new TreeSet<>();
 
-   @OneToOne
-   private User user;
+   @OneToMany
+   private Set<User> participants;
 
 
    /** @pdGenerated default getter */

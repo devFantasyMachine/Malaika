@@ -52,16 +52,17 @@ public class User implements Serializable {
     private Country userCountry;
 
     @JsonProperty(access= JsonProperty.Access.WRITE_ONLY)
-    @Column(name = "",nullable = false)
+    @Column(nullable = false)
     private LocalDateTime userCreatedAt;
 
     @Column(name = "USER_LAST_VIEW",nullable = false)
     private LocalDateTime userLastView;
 
     @Enumerated(value=EnumType.STRING)
+    @Column(name = "USER_TYPE",updatable = false, nullable = false)
     private UserType userType;
 
-    @Column(name = "USER_EMAIL")
+    @Column(name = "USER_EMAIL", columnDefinition = "VARCHAR(40) default = \"\"")
     private String userEmail;
 
     @Column(name = "USER_BIO")

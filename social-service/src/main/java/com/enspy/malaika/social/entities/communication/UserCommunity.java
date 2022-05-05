@@ -1,6 +1,7 @@
 package com.enspy.malaika.social.entities.communication;
 
 import com.enspy.malaika.social.entities.actor.User;
+import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -9,7 +10,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 
-
+@Data
 //@MappedSuperclass
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
