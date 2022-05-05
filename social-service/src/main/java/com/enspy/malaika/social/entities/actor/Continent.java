@@ -1,4 +1,4 @@
-package com.enspy.malaika.social.entities;
+package com.enspy.malaika.social.entities.actor;
 
 
 

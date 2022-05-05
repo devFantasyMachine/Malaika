@@ -4,7 +4,7 @@
  * Purpose: Defines the Class MessageType
  ***********************************************************************/
 
-package com.enspy.malaika.social.entities;
+package com.enspy.malaika.social.entities.communication;
 
 
 public enum MessageType {

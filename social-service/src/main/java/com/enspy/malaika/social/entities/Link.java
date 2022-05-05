@@ -6,14 +6,13 @@
 
 package com.enspy.malaika.social.entities;
 
-import java.util.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Lob;
 
-
+@Entity
 public class Link extends Content {
 
-
-   private java.lang.String linkValue;
-
-   private byte[] thumbnail;
+   private String linkValue;
 
 }

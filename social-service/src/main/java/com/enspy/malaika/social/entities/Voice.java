@@ -6,15 +6,62 @@
 
 package com.enspy.malaika.social.entities;
 
-import java.util.*;
 
-/** @pdOid 0c6b8ce7-bded-49b2-87a7-9dbabcf68ebb */
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Lob;
+
+@Entity
 public class Voice extends Content {
-   /** @pdOid a5a0cbb8-e9c0-45df-9d84-d757e0fbb5f4 */
-   private int duration;
-   /** @pdOid 3499db50-56e0-4f25-b1f7-86c5f9698190 */
-   private byte[] data;
-   /** @pdOid a9e52b84-f2d9-41f5-ae39-dc1c0f88bf73 */
-   private String titre;
 
+   private int duration;
+
+   @Lob
+   @Column(name = "data", columnDefinition="MEDIUMBLOB" , updatable = true, nullable = false)
+   private byte[] data;
+
+   private String title;
+
+   public Voice() {
+      super();
+   }
+
+   public Voice(int duration, byte[] data, String titre) {
+      super();
+      this.duration = duration;
+      this.data = data;
+      this.title = titre;
+
+   }
+
+   public Voice(String idContent, int shareCount, int duration, byte[] data, String titre) {
+      super(idContent, shareCount);
+      this.duration = duration;
+      this.data = data;
+      this.title = titre;
+   }
+
+   public int getDuration() {
+      return duration;
+   }
+
+   public void setDuration(int duration) {
+      this.duration = duration;
+   }
+
+   public byte[] getData() {
+      return data;
+   }
+
+   public void setData(byte[] data) {
+      this.data = data;
+   }
+
+   public String getTitle() {
+      return title;
+   }
+
+   public void setTitle(String title) {
+      this.title = title;
+   }
 }
